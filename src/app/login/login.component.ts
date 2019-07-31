@@ -1,5 +1,6 @@
 import { LoginService } from './../login.service';
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'login',
@@ -9,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
     <p>moj login</p>
   `*/
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit
+{
   submited = false;
   loading = false;
 
@@ -18,15 +20,20 @@ export class LoginComponent {
   ) 
   { }
 
-  onSubmit()
+  onSubmit(f: NgForm)
   {
-    debugger;
+    //debugger;
     this.submited = true;
 
     console.log("kliknuto na submit");
-    console.log(this.submited);
+    //console.log(this.submited);
+    
   }
 
+  ngOnInit()
+  {
+    
+  }
   
 
 }

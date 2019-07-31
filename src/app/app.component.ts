@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  title = 'New Instagram';
+  title = 'Kalopsia';
 
+  description = "Greek: (n.)The delusion of things being more beautiful than they really are.";
 
 }
