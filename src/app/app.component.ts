@@ -9,6 +9,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Kalopsia';
 
-  description = "Greek: (n.)The delusion of things being more beautiful than they really are.";
-
+  
 }
