@@ -9,13 +9,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { GlobalConstantService } from './global-constant.service';
+import { UserHomeComponent } from './user-home/user-home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    UserHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { HomeComponent } from './home/home.component';
     FormsModule
   ],
   providers: [
-    LoginService
+    LoginService,
+    GlobalConstantService
   ],
   bootstrap: [AppComponent]
 })

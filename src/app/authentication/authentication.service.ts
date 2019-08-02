@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import {User} from '../user'
 import { ConfigService } from '../config.service';
+import { GlobalConstantService } from '../global-constant.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +15,25 @@ export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  SERVER_URL = 'http://localhost/';
+  
 
-  constructor(private http: HttpClient) 
+  constructor(private http: HttpClient, private url: GlobalConstantService) 
   { 
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  login(username: string, password: string, newUser: User)
+  public get currentUserValue() : User
   {
-console.log('aut log');
+    return this.currentUserSubject.value;
+  }
 
 
+  login(email: string, password: string, newUser: User)
+  {
+    console.log('aut log');
 
-    return this.http.post<any>(this.SERVER_URL + `/api/login`, { username, password })
+    return this.http.post<any>(this.url.SERVER_URL + `/api/login`, { email, password })
 
       .subscribe(
         data =>
@@ -38,18 +43,20 @@ console.log('aut log');
           console.log(data);
         }
       )
+  }
 
-     /*       .pipe(map(user => {
-                // login successful if there's a jwt token in the response
+  register(first: string, last: string, email: string, password: string, newUser: User)
+  {
+    console.log('registracija');
+    let fullname = first + ' ' + last;
 
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
-
-                return user;
-            }));*/
+    return this.http.post<any>(this.url.SERVER_URL + `/register`, { fullname, email, password})
+      .subscribe(
+        data =>
+        {
+          newUser.token = data;
+          console.log(data);
+        }
+      )
   }
 }

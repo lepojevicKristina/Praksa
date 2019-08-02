@@ -31,13 +31,12 @@ export class LoginComponent implements OnInit
     let user = f.value;
 
     //debugger;
-
     console.log(f.value);
 
     if(f.invalid)
       return;
 
-    this.authenticationService.login(user.username, user.password, this.newUser);
+    this.authenticationService.login(user.email, user.password, this.newUser);
       
   }
 
