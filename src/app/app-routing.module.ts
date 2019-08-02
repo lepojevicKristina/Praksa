@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
+  
 
   { path: '***', redirectTo: ''}
 ];
@@ -18,6 +19,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     HttpClientModule
+
   ],
   exports: [RouterModule]
 })

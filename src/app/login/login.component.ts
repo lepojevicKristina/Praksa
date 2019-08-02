@@ -1,4 +1,4 @@
-import { LoginService } from './../login.service';
+//import { LoginService } from './../login.service';
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { AuthenticationService } from '../authentication/authentication.service'
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit
   private newUser: User = null;
 
   constructor(
-      private loginService: LoginService,
+      //private loginService: LoginService,
       private authenticationService: AuthenticationService
   ) 
   { }

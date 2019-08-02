@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -45,17 +45,26 @@ export class AuthenticationService {
       )
   }
 
-  register(first: string, last: string, email: string, password: string, newUser: User)
+  register(first: string, last: string, email: string, password: string, message)
   {
-    console.log('registracija');
-    let fullname = first + ' ' + last;
+    //console.log('registracija');
+    const fullname: string = first + ' ' + last;
 
-    return this.http.post<any>(this.url.SERVER_URL + `/register`, { fullname, email, password})
+    //console.log(fullname);
+
+    return this.http.post<any>(this.url.SERVER_URL + `/api/register`, { fullname, email, password})
       .subscribe(
         data =>
         {
-          newUser.token = data;
-          console.log(data);
+          //newUser.token = data;
+          //console.log(data);
+
+        /*  if(data==="")
+          {
+            data = "porukica";
+            message = data;
+          }
+*/
         }
       )
   }

@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 
 export class GlobalConstantService {
 
-  readonly SERVER_URL: string = 'http://localhost:8000';
+  readonly SERVER_URL: string = 'http://localhost';
 
   constructor() { }
 }

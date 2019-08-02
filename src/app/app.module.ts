@@ -1,4 +1,4 @@
-import { LoginService } from './login.service';
+//import { LoginService } from './login.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
@@ -26,7 +26,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
     FormsModule
   ],
   providers: [
-    LoginService,
+    //LoginService,
     GlobalConstantService
   ],
   bootstrap: [AppComponent]

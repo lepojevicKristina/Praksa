@@ -11,22 +11,24 @@ import { User } from '../user';
 export class RegisterComponent 
 {
   private newUser: User = null;
+  data: string = "";
 
   constructor(private authenticationService: AuthenticationService)
-  {
-    
-  }
+  { }
 
 
   onSubmit(f: NgForm) 
   {
     let user = f.value;
 
+    this.data = "podaci";
+
     //console.log(user);
     if(f.invalid)
       return;
     
-    this.authenticationService.register(user.first, user.last, user.email, user.password, this.newUser);
+    this.authenticationService.register(user.first, user.last, user.email, user.password, this.data);
 
+    console.log(this.data);
   }
 }
