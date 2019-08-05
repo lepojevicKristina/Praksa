@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { AuthenticationService } from '../authentication/authentication.service'
 import { User } from '../user';
+import { GlobalConstantService } from '../global-constant.service';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +12,10 @@ import { User } from '../user';
 export class RegisterComponent 
 {
   private newUser: User = null;
-  data: string = "";
+  private data: string;
 
-  constructor(private authenticationService: AuthenticationService)
+  constructor(private authenticationService: AuthenticationService,
+              private global: GlobalConstantService)
   { }
 
 
@@ -21,14 +23,25 @@ export class RegisterComponent
   {
     let user = f.value;
 
-    this.data = "podaci";
-
-    //console.log(user);
     if(f.invalid)
       return;
     
-    this.authenticationService.register(user.first, user.last, user.email, user.password, this.data);
+    this.authenticationService.register(user.first, user.last, user.email, user.password)
+    .subscribe(
+      response => { console.log(response);
+                            if(!response.success)
+                            {
+                              this.data = response.token;
+                              console.log(this.data);
+                            }
+                            else
+                              this.data = "success";
 
-    console.log(this.data);
+                  }
+      )
+
+
   }
+
+
 }

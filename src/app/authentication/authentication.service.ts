@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import {User} from '../user'
 import { ConfigService } from '../config.service';
 import { GlobalConstantService } from '../global-constant.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,19 @@ export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  
+  private message : string;
 
-  constructor(private http: HttpClient, private url: GlobalConstantService) 
+
+  constructor(private http: HttpClient, 
+              private global: GlobalConstantService) 
   { 
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentMessage() : string
+  {
+    return this.message;
   }
 
   public get currentUserValue() : User
@@ -28,44 +36,43 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-
-  login(email: string, password: string, newUser: User)
+  login(email: string, password: string)
   {
-    console.log('aut log');
+    return this.http.post<any>(this.global.SERVER_URL + `/api/login`, { email, password })
+      /*.subscribe(
+        function(response) { 
+                              localStorage.setItem("token", response.token);
+                              console.log("token: " + localStorage.getItem("token"));
 
-    return this.http.post<any>(this.url.SERVER_URL + `/api/login`, { email, password })
-
-      .subscribe(
-        data =>
-        {
-          newUser.token = data;
-
-          console.log(data);
-        }
-      )
+                          }
+      );*/
   }
 
-  register(first: string, last: string, email: string, password: string, message)
+  register(first: string, last: string, email: string, password: string)
   {
-    //console.log('registracija');
     const fullname: string = first + ' ' + last;
 
-    //console.log(fullname);
+    return this.http.post<any>(this.global.SERVER_URL + `/api/register`, { fullname, email, password })
+    /*  .subscribe(
+        function(response) { console.log(response);
+                              if(!response.success)
+                              {
+                                this.message = response.token;
+                                console.log(this.message);
+                              }
+                              else
+                                this.message = "success";
 
-    return this.http.post<any>(this.url.SERVER_URL + `/api/register`, { fullname, email, password})
-      .subscribe(
-        data =>
-        {
-          //newUser.token = data;
-          //console.log(data);
-
-        /*  if(data==="")
-          {
-            data = "porukica";
-            message = data;
-          }
-*/
-        }
-      )
+                    }
+        )*/
   }
+
+
+  change(first: string, last: string)
+  {
+    const fullname: string = first + ' ' + last;
+
+    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { fullname})
+  }
+
 }

@@ -11,6 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { GlobalConstantService } from './global-constant.service';
 import { UserHomeComponent } from './user-home/user-home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { UserHomeComponent } from './user-home/user-home.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    DashboardComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,

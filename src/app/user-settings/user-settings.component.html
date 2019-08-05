@@ -1,0 +1,32 @@
+<p>user-settings works!</p>
+
+<form (ngSubmit)="onSubmit(f)"  class="was-validated" id="loginForm">
+         
+        <div>
+            <label for="first" class="colOne">First name: </label> 
+            <div id="inputi" class="colTwo">
+                <input type="first" 
+                        name="first" 
+                        class="form-control is-valid" 
+                        ngModel 
+                        required 
+                        #first="ngModel">
+            </div>
+        </div>
+
+        <div>
+            <label for="last" class="colOne">Last name: </label> 
+            <div id="inputi" class="colTwo">
+                <input type="last" 
+                        name="last" 
+                        class="form-control is-valid" 
+                        ngModel 
+                        required 
+                        #last="ngModel">
+            </div>
+        </div>
+
+        <div class="button">
+            <button class="btn btn-light  btn-lg">Change</button>
+        </div>
+</form>

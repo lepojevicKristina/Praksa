@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 
 export class GlobalConstantService {
 
-  readonly SERVER_URL: string = 'http://localhost';
+  readonly SERVER_URL: string = 'http://praksa.local';
+  public message: string = "";
 
   constructor() { }
 }

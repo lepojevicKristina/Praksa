@@ -12,14 +12,14 @@ export class AuthGuard implements CanActivate
         private authenticationService: AuthenticationService
     ) { }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+    canActivate()
     {
-        const currentUser = this.authenticationService.currentUser;
-
+        //const currentUser = this.authenticationService.currentUser;
+        const currentUser = localStorage.getItem("token");
         if(currentUser)
             return true;
 
-        this.route.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        this.route.navigate(['/login']);
         return false;
     }
 }
