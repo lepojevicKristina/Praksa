@@ -39,13 +39,6 @@ export class AuthenticationService {
   login(email: string, password: string)
   {
     return this.http.post<any>(this.global.SERVER_URL + `/api/login`, { email, password })
-      /*.subscribe(
-        function(response) { 
-                              localStorage.setItem("token", response.token);
-                              console.log("token: " + localStorage.getItem("token"));
-
-                          }
-      );*/
   }
 
   register(first: string, last: string, email: string, password: string)
@@ -53,18 +46,6 @@ export class AuthenticationService {
     const fullname: string = first + ' ' + last;
 
     return this.http.post<any>(this.global.SERVER_URL + `/api/register`, { fullname, email, password })
-    /*  .subscribe(
-        function(response) { console.log(response);
-                              if(!response.success)
-                              {
-                                this.message = response.token;
-                                console.log(this.message);
-                              }
-                              else
-                                this.message = "success";
-
-                    }
-        )*/
   }
 
 
@@ -72,7 +53,13 @@ export class AuthenticationService {
   {
     const fullname: string = first + ' ' + last;
 
-    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { fullname})
+    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { fullname });
+  }
+
+
+  showPosts()
+  {
+    return this.http.get<any>(this.global.SERVER_URL + 'api/showposts');
   }
 
 }

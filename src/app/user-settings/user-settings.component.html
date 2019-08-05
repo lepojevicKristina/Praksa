@@ -1,6 +1,6 @@
 <p>user-settings works!</p>
 
-<form (ngSubmit)="onSubmit(f)"  class="was-validated" id="loginForm">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)"  class="was-validated" id="loginForm">
          
         <div>
             <label for="first" class="colOne">First name: </label> 
