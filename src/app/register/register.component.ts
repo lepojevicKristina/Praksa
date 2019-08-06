@@ -29,13 +29,14 @@ export class RegisterComponent
     this.authenticationService.register(user.first, user.last, user.email, user.password)
     .subscribe(
       response => { console.log(response);
-                            if(!response.success)
-                            {
-                              this.data = response.token;
-                              console.log(this.data);
-                            }
-                            else
-                              this.data = "success";
+                    if(!response.success)
+                    {
+                      //error
+                      this.data = response.token;
+                      console.log(this.data);
+                    }
+                    else
+                      this.data = "success";
 
                   }
       )

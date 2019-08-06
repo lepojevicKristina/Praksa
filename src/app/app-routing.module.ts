@@ -7,16 +7,21 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: 'home', component: HomeComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'usersettings', component: UserSettingsComponent},
+  
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], 
+    children: [
+      { path: 'usersettings', component: UserSettingsComponent, canActivate: [AuthGuard]},
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
+    ]},
 
-  { path: '***', redirectTo: ''}
+  { path: '***', redirectTo: 'home'}
 ];
 
 @NgModule({

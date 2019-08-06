@@ -41,6 +41,11 @@ export class AuthenticationService {
     return this.http.post<any>(this.global.SERVER_URL + `/api/login`, { email, password })
   }
 
+  logout()
+  {
+    localStorage.removeItem("token");
+  }
+
   register(first: string, last: string, email: string, password: string)
   {
     const fullname: string = first + ' ' + last;
@@ -60,6 +65,12 @@ export class AuthenticationService {
   showPosts()
   {
     return this.http.get<any>(this.global.SERVER_URL + 'api/showposts');
+  }
+
+
+  public uploadFile(data)
+  {
+    return this.http.post<any>(this.global.SERVER_URL + '/api/upload', data);
   }
 
 }

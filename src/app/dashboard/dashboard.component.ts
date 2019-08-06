@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
       )
   }
 
-  createImageFromBlob(image: Blob) {
+  createImageFromBlob(image: Blob) 
+  {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       //this.imageBlobUrl = reader.result;
@@ -30,5 +31,10 @@ export class DashboardComponent implements OnInit {
     if (image) {
       reader.readAsDataURL(image);
     }
+  }
+
+  logout()
+  {
+    this.authenticationService.logout();
   }
 }

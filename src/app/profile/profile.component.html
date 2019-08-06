@@ -1,1 +1,29 @@
-<p>profile works!</p>
+
+<div>
+    <p class="display-4">
+        {{ fullname }}
+    </p>
+
+
+    <div>
+        <div *ngIf="uploadResponse && uploadResponse.status === 'error'">
+      
+        </div>
+
+        <div *ngIf="uploadResponse && uploadResponse.status === 'success'">
+          <img [src]='uploadResponse.url' />
+            
+          <button type="submit" class="btn btn-danger">Upload</button>
+        </div>
+      
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      
+      <!--    <button type="file" name="avatar" (click)="onFileSelect($event)" class="btn btn-danger">Chose image</button>
+      -->
+            <button type="file" name="avatar" (click)="onFileSelect($event)" class="btn btn-danger">
+                <input type="file" name="avatar" accept="image/png, image/jpeg" (change)="onFileSelect($event)" />
+            </button>
+            
+        </form>
+      </div>
+</div>

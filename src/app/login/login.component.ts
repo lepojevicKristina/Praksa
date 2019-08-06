@@ -40,15 +40,15 @@ export class LoginComponent implements OnInit
     this.authenticationService.login(user.email, user.password)
       .subscribe(
         (response) => { 
-                        if(response.token == 'Error Logging In.')
-                          return;
-                        else
+                        if(response.success)
                         {
                           localStorage.setItem("token", response.token);
                           console.log("token: " + localStorage.getItem("token"));
                           if(this.guard.canActivate())
                             this.router.navigateByUrl('dashboard');
                         }
+                        else
+                          return;
 
                       }
       )
