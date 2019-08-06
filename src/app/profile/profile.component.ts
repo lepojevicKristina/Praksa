@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthenticationService } from '../authentication/authentication.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -9,42 +10,64 @@ import { AuthenticationService } from '../authentication/authentication.service'
 })
 export class ProfileComponent implements OnInit 
 {
-  form: FormGroup;
   uploadResponse;
+  imageUrl: string = "/assets/img/default_image.jpg";
+  selectedImage: File = null;
   fullname: string = 'undefined';
+  success: boolean = false;
+  images = [];
 
-  constructor(private formBuilder: FormBuilder, private authenticationService: AuthenticationService) 
+  constructor(private formBuilder: FormBuilder, 
+              private authenticationService: AuthenticationService, 
+              private sanitizer: DomSanitizer) 
   { }
 
   ngOnInit() 
   {
-    this.form = this.formBuilder.group({
-      avatar: ['']
-    });
+    this.authenticationService.userInfo()
+    .subscribe 
+    (
+      response =>
+      {
+        this.fullname = response.name;
+        this.images = response.images;
+      }
+    )
+
+    
   }
 
-  onFileSelect(event) {
-    if (event.target.files.length > 0) 
+  onSubmit(form) 
+  {
+    //console.log(this.selectedImage);
+
+    var reader = new FileReader();
+    reader.readAsArrayBuffer(this.selectedImage);
+    reader.onloadend = (evt: any) => 
     {
-      const file = event.target.files[0];
-      this.form.get('avatar').setValue(file);
+      let imgBlob = new Blob([evt.target.result], { type: 'image/jpeg' });
+
+      console.log(imgBlob);
+
+      this.authenticationService.uploadImage(imgBlob);
     }
   }
 
-  onSubmit() {
-    const formData = new FormData();
-    formData.append('avatar', this.form.get('avatar').value);
 
-    this.authenticationService.uploadFile(formData)
-      .subscribe(
-        (response) => {
-          this.uploadResponse = response;
-            console.log(response);
-        },
-        (error) => {  
-          console.log(error);
-        }
-      );
+
+
+  imageToUpload(file: FileList)
+  {
+    this.selectedImage = file.item(0);
+
+    var reader = new FileReader();
+    reader.onload = (event: any) => 
+    {
+      this.imageUrl = event.target.result;
+    }
+    reader.readAsDataURL(this.selectedImage);
+
+    console.log(this.selectedImage);
   }
 
 }

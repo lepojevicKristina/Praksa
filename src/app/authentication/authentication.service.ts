@@ -53,24 +53,31 @@ export class AuthenticationService {
     return this.http.post<any>(this.global.SERVER_URL + `/api/register`, { fullname, email, password })
   }
 
+  userInfo()
+  {
+    const token = localStorage.getItem("token");
+    return this.http.post<any>(this.global.SERVER_URL + "/api/userInfo", { token });
+  }
 
-  change(first: string, last: string)
+
+  change(first: string, last: string, password: string)
   {
     const fullname: string = first + ' ' + last;
+    const token = localStorage.getItem('token');
 
-    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { fullname });
+    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { token, fullname, password });
   }
 
 
   showPosts()
   {
-    return this.http.get<any>(this.global.SERVER_URL + 'api/showposts');
+    return this.http.get<any>(this.global.SERVER_URL + 'api/images');
   }
 
 
-  public uploadFile(data)
+  public uploadImage(data)
   {
-    return this.http.post<any>(this.global.SERVER_URL + '/api/upload', data);
+    return this.http.post<Blob>(this.global.SERVER_URL + '/api/upload', data);
   }
 
 }

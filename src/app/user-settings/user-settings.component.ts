@@ -23,7 +23,7 @@ export class UserSettingsComponent implements OnInit {
     if(f.invalid)
       return;
 
-    this.authenticationService.change(user.first, user.last)
+    this.authenticationService.change(user.first, user.last, user.password)
       .subscribe(
         (response) => { 
                         

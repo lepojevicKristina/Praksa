@@ -11,7 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent},
+  { path: '', component: HomeComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   
@@ -21,7 +21,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
     ]},
 
-  { path: '***', redirectTo: 'home'}
+  { path: '***', redirectTo: ''}
 ];
 
 @NgModule({

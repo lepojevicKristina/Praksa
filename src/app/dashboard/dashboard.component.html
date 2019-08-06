@@ -3,12 +3,23 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
         <a class="navbar-brand" [routerLink]="['profile']">My profile</a>
-        <a class="navbar-brand" routerLink="/home" (click)="logout()">Logout</a>
+        <a class="navbar-brand" [routerLink]="['usersettings']">User settings</a>
+        <a class="navbar-brand" routerLink="/" (click)="logout()">Logout</a>
         
     </nav>
 
+    <div *ngFor="let item of posts | async" class="gallery" id="gallery">
+
+            <figure class="mb-3 pics animation all 2">
+                <img class="img-fluid" src="{{ createImageFromBlob(item.image) }}" >
+                <h2 class="text-center my-3">{{ item.name }}</h2>
+            </figure>
+    </div>
+
     <div>
-        
+        {{ fullname }}
+        <br>
+        {{ email }}
         <router-outlet></router-outlet>
 
     </div>
