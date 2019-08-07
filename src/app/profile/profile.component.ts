@@ -35,13 +35,12 @@ export class ProfileComponent implements OnInit
   {
     this.authenticationService.userInfo()
       .subscribe(
-        response =>
+        (response) =>
         {
           console.log("response profile " + response);
-          console.log(JSON.parse(response));
-
-          let message = JSON.parse(response);
-          this.fullname = message.user.name;
+          //console.log(JSON.parse(response));
+          this.fullname = response.name;
+          this.email = response.email;
         }
       )
 

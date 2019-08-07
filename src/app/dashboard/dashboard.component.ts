@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../authentication/authentication.service';
 import { User } from '../user';
 import { Post } from '../post';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,10 +14,10 @@ export class DashboardComponent implements OnInit
   public data : any;
   fullname: string;
   email: string;
-  posts = new Array<Post>();
+  posts = [];
   converted = new Array<Post>();
 
-  constructor(private authenticationService: AuthenticationService) 
+  constructor(private authenticationService: AuthenticationService, private _sanitizer: DomSanitizer) 
   { }
 
   ngOnInit() 
@@ -25,12 +26,22 @@ export class DashboardComponent implements OnInit
       .subscribe(
         (response) => 
         {
-          //console.log("response showPosts " + response.postsArray);
-          console.log("json " + response);
 
-        /*  const message = JSON.parse(response);
-          this.posts = message.postsArray;
+          this.posts = response.postsArray;
+          //console.log(this.posts);
 
+          for(let i=0; i < this.posts.length; i++)
+          {
+            let a = response.postsArray[i].file;
+            console.log("aaaaa " + a);
+            console.log(this.posts[i].name );
+            //this.posts[i].file = window.URL.createObjectURL(response.postsArray[i].file);
+            this.posts[i].file = 'data:image/png;base64,' + response.postsArray[i].file
+            //this.posts[i].file = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + );
+            //console.log(this.posts[i].file);
+          }
+
+/*
           let i = 0;
           for(let item of message.postsArray)
           {
@@ -44,6 +55,10 @@ export class DashboardComponent implements OnInit
 
             console.log(i);
             i++;
+
+
+
+            this.ImageSource = window.URL.createObjectURL(blob);
           }
 */
 
@@ -51,13 +66,13 @@ export class DashboardComponent implements OnInit
       )
   }
 
-  convert(p, i)
+/*  convert(p, i)
   {
     
       var reader = new FileReader();
       reader.onload = function() {
           var dataUrl = reader.result;
-          //var base64 = dataUrl.split(',')[1];
+          var base64 = dataUrl.split(',')[1];
 
           //this.converted[i].image = base64;
       };
@@ -65,7 +80,7 @@ export class DashboardComponent implements OnInit
 
   
   }
-
+*/
 
 
   createImageFromBlob(image: Blob) 
