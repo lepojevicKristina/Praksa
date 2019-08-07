@@ -72,9 +72,16 @@ export class AuthenticationService {
   }
 
 
+
+
+
+
+
+
+  
   showPosts()
   {
-    return this.http.get<any>(this.global.SERVER_URL + '/api/image');
+    return this.http.get<any>(this.global.SERVER_URL + '/api/dashboard');
   }
 
 
@@ -82,7 +89,7 @@ export class AuthenticationService {
   {
     console.log("upload");
     console.log(data);
-    return this.http.post(this.global.SERVER_URL + '/api/upload', data);
+    return this.http.post<any>(this.global.SERVER_URL + `/api/image`, data);
   }
 
 

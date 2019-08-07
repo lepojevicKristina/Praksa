@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit
   fileToUpload: File = null;
 
   fullname: string = 'undefined';
+  email: string = 'undefined';
   success: boolean = false;
   images = [];
 
@@ -27,12 +28,14 @@ export class ProfileComponent implements OnInit
   ngOnInit() 
   {
     this.authenticationService.userInfo()
-      .subscribe 
-      (
+      .subscribe(
         response =>
         {
-          this.fullname = response.name;
-          //this.images = response.images;
+          console.log("response dashboard");
+          console.log(JSON.parse(response));
+          
+          let message = JSON.parse(response);
+          this.fullname = message.user.name;
         }
       )
 

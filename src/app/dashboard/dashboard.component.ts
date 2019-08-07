@@ -21,23 +21,13 @@ export class DashboardComponent implements OnInit
 
   ngOnInit() 
   {
-    this.authenticationService.userInfo()
-      .subscribe(
-        response =>
-        {
-          console.log("response dashboard");
-          console.log(JSON.parse(response))
-          let message = JSON.parse(response);
-          this.fullname = message.user.name;
-        }
-      )
-
     this.authenticationService.showPosts()
       .subscribe(
         response => 
         {
           console.log("response showPosts");
-          this.posts = response.postsArray;
+          let message = JSON.parse(response);
+          this.posts = message.postsArray;
 
           let i = 0;
           for(let item in this.posts)
