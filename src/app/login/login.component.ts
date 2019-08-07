@@ -11,9 +11,6 @@ import { AuthGuard } from '../guards/auth.guard';
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.sass'],
- /* template: `
-    <p>moj login</p>
-  `*/
 })
 export class LoginComponent implements OnInit
 {
@@ -32,7 +29,7 @@ export class LoginComponent implements OnInit
   {
     let user = f.value;
 
-    console.log(f.value);
+    //console.log(f.value);
 
     if(f.invalid)
       return;
@@ -43,7 +40,7 @@ export class LoginComponent implements OnInit
                         if(response.success)
                         {
                           localStorage.setItem("token", response.token);
-                          console.log("token: " + localStorage.getItem("token"));
+                          //console.log("token: " + localStorage.getItem("token"));
                           if(this.guard.canActivate())
                             this.router.navigateByUrl('index/dashboard');
                         }

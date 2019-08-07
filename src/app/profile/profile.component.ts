@@ -41,17 +41,36 @@ export class ProfileComponent implements OnInit
 
   }
 
+  
+
   onSubmit() 
   {
-    console.log(this.fileToUpload);
-    this.authenticationService.uploadImage(this.fileToUpload);
+    //console.log(this.fileToUpload);
+   // let formData 
+
+   const formData = new FormData();
+   formData.append('file', this.fileToUpload, this.fileToUpload.name);
+
+   const uploadData = new FormData();
+    uploadData.append('myFile', this.selectedImage, this.selectedImage.name);
+
+
+    console.log("form data  " + formData);
+
+    this.authenticationService.uploadImage(formData)
+      .subscribe(
+        response =>
+        {
+          console.log(response);
+        }
+      )
 
   }
 
-
-
   imageToUpload(file: FileList)
   {
+    
+
     this.selectedImage = file.item(0);
     this.fileToUpload = file.item(0);
 

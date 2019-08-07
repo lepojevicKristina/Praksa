@@ -17,6 +17,7 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   private message : string;
+  private route: Router;
 
 
   constructor(private http: HttpClient, 
@@ -43,7 +44,18 @@ export class AuthenticationService {
 
   logout()
   {
-    localStorage.removeItem("token");
+
+    const token = localStorage.getItem('token');
+    // localStorage.removeItem("token");
+    this.http.post<any>(this.global.SERVER_URL + '/api/logout', {token})
+      .subscribe (
+        response => {
+          if(response.success)
+            localStorage.removeItem('token');
+          else
+          this.route.navigateByUrl('index/dashboard')
+        }
+      )
   }
 
   register(first: string, last: string, email: string, password: string)
@@ -84,12 +96,12 @@ export class AuthenticationService {
   }
 
 
-  public uploadImage(data: File)
+  public uploadImage(image: FormData)
   {
     console.log("upload");
-    console.log(data);
+    console.log(image);
     const token = localStorage.getItem('token');
-    return this.http.post<any>(this.global.SERVER_URL + `/api/image`, {data, token});
+    return this.http.post<any>(this.global.SERVER_URL + `/api/image`, {token, image});
   }
 
 

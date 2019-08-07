@@ -25,22 +25,27 @@ export class DashboardComponent implements OnInit
       .subscribe(
         (response) => 
         {
-          console.log("response showPosts " + response);
-          const message = JSON.parse(response);
+          //console.log("response showPosts " + response.postsArray);
+          console.log("json " + response);
+
+        /*  const message = JSON.parse(response);
           this.posts = message.postsArray;
 
           let i = 0;
-          for(let item in this.posts)
+          for(let item of message.postsArray)
           {
-            let post = new Post();
+
+            console.log(item.id);
+            //let post = new Post();
             //post.name = item.name;
-            this.converted.push(post);
+            //this.converted.push(post);
             
             //post.image = this.convert(item.image, i);
 
+            console.log(i);
             i++;
           }
-
+*/
 
         }
       )
@@ -52,7 +57,7 @@ export class DashboardComponent implements OnInit
       var reader = new FileReader();
       reader.onload = function() {
           var dataUrl = reader.result;
-          var base64 = dataUrl.split(',')[1];
+          //var base64 = dataUrl.split(',')[1];
 
           //this.converted[i].image = base64;
       };
