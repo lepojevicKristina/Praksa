@@ -14,12 +14,13 @@
       
         <form  (ngSubmit)="onSubmit()">
       
-            <input type="file"                              
+            <input type="file"     
+                    name="file"                         
                     (change)='imageToUpload($event.target.files)'
                     accept="image/*"                     
             >
 
-            <button type="submit" class="btn btn-danger">Upload</button>
+          <!--  <button type="submit" class="btn btn-danger">Upload</button> -->
         
         </form>
 
