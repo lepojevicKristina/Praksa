@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit
 {
   submited = false;
   loading = false;
-
+  title = 'Kalopsia';
 
   constructor(
       private authenticationService: AuthenticationService,
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit
                           localStorage.setItem("token", response.token);
                           console.log("token: " + localStorage.getItem("token"));
                           if(this.guard.canActivate())
-                            this.router.navigateByUrl('dashboard');
+                            this.router.navigateByUrl('index/dashboard');
                         }
                         else
                           return;

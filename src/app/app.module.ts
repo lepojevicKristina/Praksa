@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthenticationService } from './authentication/authentication.service';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AuthenticationService } from './authentication/authentication.service';
     HomeComponent,
     DashboardComponent,
     UserSettingsComponent,
-    ProfileComponent
+    ProfileComponent,
+    IndexComponent
   ],
   imports: [
     ReactiveFormsModule,

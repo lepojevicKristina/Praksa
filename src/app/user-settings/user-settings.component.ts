@@ -34,4 +34,9 @@ export class UserSettingsComponent implements OnInit {
 
   }
 
+
+  logout()
+  {
+    this.authenticationService.logout();
+  }
 }

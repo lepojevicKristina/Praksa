@@ -13,6 +13,7 @@ export class RegisterComponent
 {
   private newUser: User = null;
   private data: string;
+  title = 'Kalopsia';
 
   constructor(private authenticationService: AuthenticationService,
               private global: GlobalConstantService)

@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { ProfileComponent } from './profile/profile.component';
+import { IndexComponent } from './index/index.component';
 
 
 const routes: Routes = [
@@ -15,8 +16,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent},
   
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], 
+  { path: 'index', component: IndexComponent, canActivate: [AuthGuard],  
     children: [
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       { path: 'usersettings', component: UserSettingsComponent, canActivate: [AuthGuard]},
       { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]}
     ]},

@@ -55,10 +55,13 @@ export class AuthenticationService {
 
   userInfo()
   {
+    console.log('user info');
+
     const token = localStorage.getItem("token");
-    return this.http.post<any>(this.global.SERVER_URL + "/api/userInfo", { token });
+    return this.http.post<any>(this.global.SERVER_URL + "/api/dashboard/profile", { token });
   }
 
+  
 
   change(first: string, last: string, password: string)
   {
@@ -71,13 +74,18 @@ export class AuthenticationService {
 
   showPosts()
   {
-    return this.http.get<any>(this.global.SERVER_URL + 'api/images');
+    return this.http.get<any>(this.global.SERVER_URL + '/api/image');
   }
 
 
-  public uploadImage(data)
+  public uploadImage(data: File)
   {
-    return this.http.post<Blob>(this.global.SERVER_URL + '/api/upload', data);
+    console.log("upload");
+    console.log(data);
+    return this.http.post(this.global.SERVER_URL + '/api/upload', data);
   }
+
+
+
 
 }

@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   description = "Greek: (n.)The delusion of things being more beautiful than they really are.";
+  title = 'Kalopsia';
 
   constructor() { }
 

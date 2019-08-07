@@ -1,5 +1,6 @@
 
-<div style="text-align: left; margin-left: 3%;">
+
+<div style="margin-left: 3%;">
     <p id="fullname">
         {{ fullname }}
     </p>
@@ -11,11 +12,9 @@
 
         <img [src]='imageUrl' style="width: 30%; height: 30%;" id="img" />
       
-        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <form  (ngSubmit)="onSubmit()">
       
-            <input type="file"  
-                    ngModel   
-                    #image="ngModel"                               
+            <input type="file"                              
                     (change)='imageToUpload($event.target.files)'
                     accept="image/*"                     
             >
@@ -30,7 +29,7 @@
     <div *ngFor="let item of images | async" class="gallery" id="gallery">
 
         <div class="mb-3 pics animation all 2">
-            <img class="img-fluid" src="{{ item }}"" >
+            <img class="img-fluid" src="{{ item }}" >
         </div>
     </div>
 

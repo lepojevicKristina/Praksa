@@ -13,6 +13,8 @@ export class ProfileComponent implements OnInit
   uploadResponse;
   imageUrl: string = "/assets/img/default_image.jpg";
   selectedImage: File = null;
+  fileToUpload: File = null;
+
   fullname: string = 'undefined';
   success: boolean = false;
   images = [];
@@ -25,40 +27,30 @@ export class ProfileComponent implements OnInit
   ngOnInit() 
   {
     this.authenticationService.userInfo()
-    .subscribe 
-    (
-      response =>
-      {
-        this.fullname = response.name;
-        this.images = response.images;
-      }
-    )
+      .subscribe 
+      (
+        response =>
+        {
+          this.fullname = response.name;
+          //this.images = response.images;
+        }
+      )
 
-    
   }
 
-  onSubmit(form) 
+  onSubmit() 
   {
-    //console.log(this.selectedImage);
+    console.log(this.fileToUpload);
+    this.authenticationService.uploadImage(this.fileToUpload);
 
-    var reader = new FileReader();
-    reader.readAsArrayBuffer(this.selectedImage);
-    reader.onloadend = (evt: any) => 
-    {
-      let imgBlob = new Blob([evt.target.result], { type: 'image/jpeg' });
-
-      console.log(imgBlob);
-
-      this.authenticationService.uploadImage(imgBlob);
-    }
   }
-
 
 
 
   imageToUpload(file: FileList)
   {
     this.selectedImage = file.item(0);
+    this.fileToUpload = file.item(0);
 
     var reader = new FileReader();
     reader.onload = (event: any) => 
@@ -68,6 +60,11 @@ export class ProfileComponent implements OnInit
     reader.readAsDataURL(this.selectedImage);
 
     console.log(this.selectedImage);
+
   }
 
+  logout()
+  {
+    this.authenticationService.logout();
+  }
 }
