@@ -23,10 +23,10 @@ export class DashboardComponent implements OnInit
   {
     this.authenticationService.showPosts()
       .subscribe(
-        response => 
+        (response) => 
         {
-          console.log("response showPosts");
-          let message = JSON.parse(response);
+          console.log("response showPosts " + response);
+          const message = JSON.parse(response);
           this.posts = message.postsArray;
 
           let i = 0;

@@ -31,9 +31,9 @@ export class ProfileComponent implements OnInit
       .subscribe(
         response =>
         {
-          console.log("response dashboard");
+          console.log("response profile " + response);
           console.log(JSON.parse(response));
-          
+
           let message = JSON.parse(response);
           this.fullname = message.user.name;
         }
