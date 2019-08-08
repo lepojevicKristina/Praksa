@@ -1,18 +1,27 @@
 
 
-<div style="margin-left: 3%;">
-    <p id="fullname">
-        {{ fullname }}, {{ email }}
-    </p>
+<div style="margin: 5%;">
+    <div id="fullname" style="background-color: black; 
+                                width: 40%; 
+                                padding: 2%;
+                                border: 5px solid white;
+                                border-radius: 10px;
+                                margin-bottom: 2%">
+        Your name: {{ fullname }} 
+        <br>
+        Your email: {{ email }}
+        <br>
+        Place: {{ place }}
+    </div>
 
     <div>
         <div *ngIf="uploadResponse && uploadResponse.status === 'error'">
       
         </div>
 
-        <img [src]='imageUrl' style="width: 30%; height: 30%;" id="img" />
+        <img [src]='imageUrl' style="width: 20%; height: auto;" id="img" />
       
-        <form  (ngSubmit)="onSubmit()">
+        <form  (ngSubmit)="onSubmit()" style="margin: 1%">
       
             <input type="file"     
                     name="file"                         

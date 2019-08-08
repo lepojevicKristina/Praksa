@@ -100,9 +100,9 @@ export class DashboardComponent implements OnInit
   onSubmit(f: NgForm, item)
   {
     let com = f.value;
-    console.log(com);
+    console.log(com.comment);
 
-    this.authenticationService.comment(com, item.id, item.userID)
+    this.authenticationService.comment(com.comment, item.id, item.userId)
       .subscribe (
         (response) => {
 
@@ -168,6 +168,16 @@ export class DashboardComponent implements OnInit
 
   }
 
+  deletePost(item)
+  {
+    const id = item.id;
+    this.authenticationService.deletePost(id)
+      .subscribe (
+        (response) => {
+          
+        }
+      )
+  }
 
 
   logout()

@@ -1,8 +1,10 @@
 <div id="glavno">
 
-    <div *ngFor="let item of posts" class="gallery" id="gallery" >
+    <h2 style="margin: 5%;">See photos of other users:</h2>
 
-            <figure class="mb-3 pics animation all 2">
+    <div *ngFor="let item of posts"  style="margin: 3%">
+
+            <!-- <figure class="mb-3 pics animation all 2">
                 <img src='http://praksa.local/files/{{item.file}}' />
                 <hr>
                 <div>
@@ -37,7 +39,53 @@
                     <button ><img style="width: 15px; height: 15px;" src="/assets/img/comment.png"/></button>
 
                 </form>
-            </figure>
+            </figure> -->
+
+
+
+            <div class="gallery">
+                    <img src='http://praksa.local/files/{{item.file}}' >
+                    <div class="desc">
+                        <i class="fas fa-heart"></i>
+                            {{ item.likes }}
+                            <br />
+                            <button  (click)='like(item)' id="like{{item.id}}" [ngClass]="item.liked == 0 ? 'white' : 'red'" style="width: 50px; height: 50px;">
+                                <!-- Like -->
+                                <img src='../../assets/img/white.png' style="width: 30px; height: 30px;">
+                            </button>
+                            <button (click)='deletePost(item)'  style="width: 50px; height: 50px; margin-left: 5px"><i class="fas fa-trash"></i></button>
+                                <br />
+                            {{ item.name }}
+
+                            <div class="card">
+                                <ul class="list-group list-group-flush" id="komentari" *ngFor="let item2 of item.comments" style="color: black">
+                                    <li class="list-group-item"> {{ item2.userCommentName }}: 
+                                        {{ item2.text }}
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-top: 5px">
+                                <form #f="ngForm" (ngSubmit)="onSubmit(f, item)" 
+                                        class="was-validated" 
+                                        >
+                                    <input type="text" 
+                                            name="comment" 
+                                            #comment="ngModel" 
+                                            ngModel
+                                            id="comment" 
+                                            placeholder="Comment..." 
+                                            minlength="2"
+                                            maxlength="100">
+                                            
+                                    <button ><img style="width: 15px; height: 15px;" src="/assets/img/comment.png"/></button>
+                
+                                </form>
+                            </div>
+                    </div>
+                </div>
+        
+            <!-- </div> -->
     </div>
 
  </div>

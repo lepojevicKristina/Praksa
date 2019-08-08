@@ -122,4 +122,10 @@ export class AuthenticationService {
     return this.http.post<any>(this.global.SERVER_URL + '/api/comment', {token, id, userPostId, com});
   }
 
+  deletePost(id)
+  {
+    const token = localStorage.getItem('token');
+    return this.http.post<any>(this.global.SERVER_URL + '/api/delete', {id, token});
+  }
+
 }

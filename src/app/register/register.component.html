@@ -1,12 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 
-    <a class="navbar-brand" routerLink="/">Home</a>
-    <a class="navbar-brand" routerLink="/login">Log In</a>
-    <a class="navbar-brand" routerLink="/register">Register</a>
+    <a class="navbar-brand" routerLink="/"><span class="fas fa-home"></span> Home</a>
+    <a class="navbar-brand" routerLink="/login"><i class="fas fa-sign-in-alt"></i> Log In</a>
+    <a class="navbar-brand" routerLink="/register"><i class="fas fa-plus"></i> Register</a>
 
 </nav>
 
-<h1>
+<div style="margin: 5%">
+
+<h1  style="text-align: center">
 Welcome to {{ title }}!
 </h1>
 
@@ -14,7 +16,7 @@ Welcome to {{ title }}!
 
 
 <div>
-    <div class="naslov">Register</div>
+    <div class="naslov"  style="text-align: center">Register</div>
 
     <div class="forma">
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="was-validated"  id="registerForm">
@@ -86,14 +88,16 @@ Welcome to {{ title }}!
 
 
         <div class="button">
-            <button class="btn btn-light btn-lg" id="register">Register</button>
+            <button class="btn btn-secondary btn-lg" id="register">Register</button>
         </div>
 
     </form>
 </div>
-
-    <p>
-        Have an account? <a routerLink="/login" >Log In</a>
+<br>
+    <p  style="text-align: center">
+        Have an account? <a routerLink="/login" class="btn btn-secondary btn-lg">Log In</a>
     </p>
+
+</div>
 
 </div>

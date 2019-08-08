@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import { AuthenticationService } from '../authentication/authentication.service'
 import { User } from '../user';
 import { GlobalConstantService } from '../global-constant.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent
   title = 'Kalopsia';
 
   constructor(private authenticationService: AuthenticationService,
-              private global: GlobalConstantService)
+              private global: GlobalConstantService,
+              private route: Router)
   { }
 
 
@@ -37,8 +39,11 @@ export class RegisterComponent
                       console.log(this.data);
                     }
                     else
+                    {
                       this.data = "success";
-
+                      this.route.navigate(['/login']);
+                    }
+                      
                   }
       )
 

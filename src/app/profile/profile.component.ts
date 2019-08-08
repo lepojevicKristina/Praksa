@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit
 
   fullname: string = 'undefined';
   email: string = 'undefined';
+  place: string = 'undefined';
   success: boolean = false;
   images = [];
 
@@ -41,6 +42,7 @@ export class ProfileComponent implements OnInit
           //console.log(JSON.parse(response));
           this.fullname = response.name;
           this.email = response.email;
+          this.place = response.place;
         }
       )
 
@@ -73,7 +75,7 @@ export class ProfileComponent implements OnInit
       .subscribe(
         response =>
         {
-          console.log(response + " update response");
+          //console.log(response + " update response");
         }
       )
 

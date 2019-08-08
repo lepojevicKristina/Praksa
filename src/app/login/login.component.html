@@ -1,17 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 
-    <a class="navbar-brand" routerLink="/">Home</a>
-    <a class="navbar-brand" routerLink="/login">Log In</a>
-    <a class="navbar-brand" routerLink="/register">Register</a>
+    <a class="navbar-brand" routerLink="/"><span class="fas fa-home"></span> Home</a>
+    <a class="navbar-brand" routerLink="/login"><i class="fas fa-sign-in-alt"></i> Log In</a>
+    <a class="navbar-brand" routerLink="/register"><i class="fas fa-plus"></i> Register</a>
 
 </nav>
 
-<h1>
+
+
+<div style="margin: 5%">
+
+<h1  style="text-align: center">
 Welcome to {{ title }}!
 </h1>
 
 
-<div class="naslov">Log In</div>
+<div class="naslov"  style="text-align: center">Log In</div>
 
 <div>
     <div class="forma">
@@ -44,7 +48,7 @@ Welcome to {{ title }}!
         </div>
 
         <div class="button">
-            <button class="btn btn-light  btn-lg">Log In</button>
+            <button class="btn btn-secondary btn-lg">Log In</button>
         </div>
 
     </form>
@@ -52,9 +56,10 @@ Welcome to {{ title }}!
     </div>
 
 </div>
-
-<p>
-    New on Kalopsia? <a routerLink="/register" >Register</a>
+<br>
+<p  style="text-align: center">
+    New on Kalopsia? <a routerLink="/register" class="btn btn-secondary btn-lg">Register</a>
 </p>
 
 
+</div>
