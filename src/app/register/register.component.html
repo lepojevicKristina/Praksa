@@ -47,6 +47,19 @@ Welcome to {{ title }}!
         </div>
 
         <div>
+            <label for="place" class="colOne">Place: </label>
+            <div class="colTwo">
+                <input type="text"
+                        name="place"
+                        class="form-control is-valid" 
+                        ngModel
+                        required
+                        #place="ngModel"
+                        minlength="2">
+            </div>
+        </div>
+
+        <div>
             <label for="email" class="colOne">Email: </label>
             <div class="colTwo">
                 <input type="email" 
@@ -76,9 +89,6 @@ Welcome to {{ title }}!
             <button class="btn btn-light btn-lg" id="register">Register</button>
         </div>
 
-        <div class="errorMessage">
-            {{ data }}
-        </div>
     </form>
 </div>
 

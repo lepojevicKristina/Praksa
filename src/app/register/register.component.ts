@@ -27,7 +27,7 @@ export class RegisterComponent
     if(f.invalid)
       return;
     
-    this.authenticationService.register(user.first, user.last, user.email, user.password)
+    this.authenticationService.register(user.first, user.last, user.place, user.email, user.password)
     .subscribe(
       response => { console.log(response);
                     if(!response.success)

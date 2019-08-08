@@ -1,20 +1,43 @@
-<div >
+<div id="glavno">
 
-    <div *ngFor="let item of posts" class="gallery" id="gallery">
+    <div *ngFor="let item of posts" class="gallery" id="gallery" >
 
             <figure class="mb-3 pics animation all 2">
                 <img src='http://praksa.local/files/{{item.file}}' />
                 <hr>
-                <p class="text-center my-3">{{ item.name }}  
-                    <button (click)='like(item)' id="like" >
+                <div>
+                    
+                    {{ item.name }} {{ item.likes }}
+
+                    <button  (click)='like(item)' id="like{{item.id}}" [ngClass]="item.liked == 0 ? 'white' : 'red'" >
                         Like
                     </button>
 
-                    {{myColor}}
-                </p>
+                    <div class="card" (ngInit)="setColor(item)">
+                        <ul class="list-group list-group-flush" id="komentari" *ngFor="let item2 of item.comments">
+                            <li class="list-group-item"> {{ item2.userCommentName }}: 
+                                {{ item2.text }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    
+                </div>
+
+                <form #f="ngForm" (ngSubmit)="onSubmit(f, item)" class="was-validated">
+                    <input type="text" 
+                            name="comment" 
+                            #comment="ngModel" 
+                            ngModel
+                            id="comment" 
+                            placeholder="Comment..." 
+                            minlength="2"
+                            maxlength="100">
+                            
+                    <button ><img style="width: 15px; height: 15px;" src="/assets/img/comment.png"/></button>
+
+                </form>
             </figure>
     </div>
 
-    <!-- [ngStyle]="{'backgorund-color': myColor}" -->
-  
  </div>

@@ -4,6 +4,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 import { User } from '../user';
 import { Post } from '../post';
 import { DomSanitizer, SafeHtml, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +18,9 @@ export class DashboardComponent implements OnInit
   email: string;
   posts = [];
   iterator: number = 0
+  i: number [] = [];
   myColor: string = "white";
-
+  comments = [];
   
   constructor(private authenticationService: AuthenticationService, 
               private sanitizer: DomSanitizer) 
@@ -26,6 +28,8 @@ export class DashboardComponent implements OnInit
 
   ngOnInit() 
   {
+    console.log("ngoninit");
+
     this.authenticationService.showPosts()
       .subscribe(
         (response) => 
@@ -33,6 +37,14 @@ export class DashboardComponent implements OnInit
 
           this.posts = response.postsArray;
 
+          let j;
+          for(j = 0; j < this.posts.length; j++)
+          {
+            this.i.push(0);
+            //let id = this.posts[j].id;
+            //document.getElementById('like' + this.posts[j].id).style.background = this.myColor;
+          }
+          this.i.push(0);
           //for(let i=0; i < response.postsArray.length; i++)
           //{
             //let a = response.postsArray[i].file;
@@ -41,13 +53,62 @@ export class DashboardComponent implements OnInit
             //this.posts[i].file = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + response.postsArray[i].file);
             //this.posts[i].file =this.transform('data:image/png;base64, ' +  a, 'resourceUrl');
 
-          //}//kraj for petlje
+          //}
 
-        } 
+
+          for(j = 0; j < this.posts.length; j++)
+          {
+            if( this.posts[j].liked )
+            {
+              this.i[this.posts[j].id] = 1;
+            }
+          }
+        }
       )
   }
 
 
+  setColor(item)
+  {
+
+    console.log("set color : ");
+    // let j;
+    // for(j = 0; j < this.i.length; j++)
+    // {
+    //   if(this.posts[j].liked == 0)
+    //   {
+    //     document.getElementById('like' + this.posts[j].id).style.background = "white";
+    //   }
+    //   else
+    //   {
+    //     this.i[this.posts[j].id] = 1;
+    //     document.getElementById('like' + this.posts[j].id).style.background = "red";
+    //   }
+    // }
+
+    if(item.liked == 0)
+    {
+      document.getElementById('like' + item.id).style.background = "white";
+    }
+    else
+    {
+      this.i[item.id] = 1;
+      document.getElementById('like' + item.id).style.background = "red";
+    }
+  }
+
+  onSubmit(f: NgForm, item)
+  {
+    let com = f.value;
+    console.log(com);
+
+    this.authenticationService.comment(com, item.id, item.userID)
+      .subscribe (
+        (response) => {
+
+        }
+      )
+  }
 
 
   dataURItoBlob(dataURI) 
@@ -63,43 +124,39 @@ export class DashboardComponent implements OnInit
     return blob;
   }
 
-  public transform(value: any, type: string): SafeHtml | SafeUrl | SafeResourceUrl {
-    switch (type) {
-			case 'html': return this.sanitizer.bypassSecurityTrustHtml(value);
-			case 'url': return this.sanitizer.bypassSecurityTrustUrl(value);
-			case 'resourceUrl': return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-			default: throw new Error(`Invalid safe type specified: ${type}`);
-		}
-  }
 
-
-  changeColor()
+  changeColor(id)
   {
-    //let elem = document.getElementById('like');
-    if(this.iterator%2 == 1)
+
+    console.log(this.myColor);
+    if(this.i[id]%2 == 1)
     {
-      console.log(this.myColor);
       this.myColor = "red";
-     // this.iterator = 0;
     }
     else
     {
       this.myColor = "white";
-      this.iterator = 0;
+      this.i[id] = 0;
     }
   }
 
 
   like(item)
   {
-    console.log("like " + item.id);
-    this.iterator = this.iterator + 1;
+    console.log("**** item id " + this.i[item.id]);
 
-    this.changeColor();
+    console.log("like " + item.userId);
+    //this.iterator = this.iterator + 1;
+    this.i[item.id] = this.i[item.id] + 1; 
+//debugger;
+    console.log("item id " + this.i[item.id]);
+
+    this.changeColor(item.id);
 
     console.log(this.myColor);
 
-    document.getElementById('like').style.color = this.myColor;
+    document.getElementById('like' + item.id).style.background = this.myColor;
+    //document.getElementById('like').style.backgroundImage = "'url(' + this.myColor +')'";
 
     this.authenticationService.like(item.id, item.userId)
       .subscribe (

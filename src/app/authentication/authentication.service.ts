@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {User} from '../user'
-import { ConfigService } from '../config.service';
 import { GlobalConstantService } from '../global-constant.service';
 import { Router } from '@angular/router';
 
@@ -58,11 +57,11 @@ export class AuthenticationService {
       )
   }
 
-  register(first: string, last: string, email: string, password: string)
+  register(first: string, last: string, place: string, email: string, password: string)
   {
     const fullname: string = first + ' ' + last;
 
-    return this.http.post<any>(this.global.SERVER_URL + `/api/register`, { fullname, email, password })
+    return this.http.post<any>(this.global.SERVER_URL + `/api/register`, { fullname, email, place, password })
   }
 
   userInfo()
@@ -87,6 +86,11 @@ export class AuthenticationService {
     return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { token, fullname });
   }
 
+  // changePlace(place: string)
+  // {
+  //   const token = localStorage.getItem('token');
+  //   return this.http.post<any>(this.global.SERVER_URL + '', {token, place});
+  // }
 
 
 
@@ -105,12 +109,17 @@ export class AuthenticationService {
     return this.http.post<any>(this.global.SERVER_URL + `/api/image`, {token, image});
   }
 
-  like(id, userId)
+  like(postId, userPostId)
   {
     const token = localStorage.getItem('token');
-    return this.http.post<any>(this.global.SERVER_URL + '/api/like', {token, id, userId});
+    return this.http.post<any>(this.global.SERVER_URL + '/api/like', {token, postId, userPostId});
   }
 
 
+  comment(com, id, userPostId)
+  {
+    const token = localStorage.getItem('token');
+    return this.http.post<any>(this.global.SERVER_URL + '/api/comment', {token, id, userPostId, com});
+  }
 
 }
