@@ -73,17 +73,26 @@ export class AuthenticationService {
     return this.http.post<any>(this.global.SERVER_URL + "/api/dashboard/profile", { token });
   }  
 
-  change(first: string, last: string, password: string)
+  change(first: string, last: string)
   {
-    const fullname: string = first + ' ' + last;
+    console.log("ispis");
+
+    const fullname: string = '' + first + ' ' + last;
+
+    //console.log("token  :  " + localStorage.getItem('token'))
     const token = localStorage.getItem('token');
 
-    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { token, fullname, password });
+    console.log("name  ");
+
+    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { token, fullname });
   }
 
+  changePassword(password: string)
+  {
+    const token = localStorage.getItem('token');
 
-
-
+    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { token, password });
+  }
 
 
 

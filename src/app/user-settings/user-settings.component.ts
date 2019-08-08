@@ -14,24 +14,32 @@ export class UserSettingsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(f: NgForm)
+  onSubmitName(f: NgForm)
   {
-    let user = f.value;
+    const user = f.value;
 
     console.log(f.value);
 
-    if(f.invalid)
-      return;
-
-    this.authenticationService.change(user.first, user.last, user.password)
+    this.authenticationService.change(user.first, user.last)
       .subscribe(
         (response) => { 
                         
-                        
-
                       }
       )
 
+  }
+
+  onSubmitPassword(f: NgForm)
+  {
+    let password = f.value;
+    if(f.invalid)
+      return;
+    this.authenticationService.changePassword(password)
+      .subscribe(
+        (response) => {
+
+        }
+      )
   }
 
 

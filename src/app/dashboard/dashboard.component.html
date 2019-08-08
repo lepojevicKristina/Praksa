@@ -1,13 +1,16 @@
 <div >
 
     <div>
-
+        <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+    AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+        9TXL0Y4OHwAAAABJRU5ErkJggg==" />
     </div>
 
     <div *ngFor="let item of posts" class="gallery" id="gallery">
 
             <figure class="mb-3 pics animation all 2">
-                <img class="img-fluid" src="{{ item.file }}" >
+                <img  src='data:image/png;base64, {{item.file}}' />
+                <hr>
                 <h2 class="text-center my-3">{{ item.name }}</h2>
             </figure>
     </div>

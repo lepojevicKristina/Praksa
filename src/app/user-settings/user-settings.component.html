@@ -1,42 +1,41 @@
 
 
 <div class="forma">
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
-                <div>
-                    <label for="first" class="colOne">First name: </label> 
-                    <div id="inputi" class="colTwo">
-                        <input type="text" 
-                                name="first" 
-                                class="form-control" 
-                                ngModel
-                                #first="ngModel">
-                    </div>
-                </div>
+<form #f="ngForm" (ngSubmit)="onSubmitName(f)" class="was-validated">
+    <div>
+        <label for="first" class="colOne">First name: </label> 
+        <div id="inputi" class="colTwo">
+            <input type="text" 
+                    name="first" 
+                    class="form-control is-valid" 
+                    ngModel
+                    required
+                    minlength="3"
+                    #first="ngModel">
+        </div>
+    </div>
 
-                <div>
-                    <label for="last" class="colOne">Last name: </label> 
-                    <div id="inputi" class="colTwo">
-                        <input type="text" 
-                                name="last" 
-                                class="form-control" 
-                                ngModel 
-                                #last="ngModel">
-                    </div>
-                </div>
+    <div>
+        <label for="last" class="colOne">Last name: </label> 
+        <div id="inputi" class="colTwo">
+            <input type="text" 
+                    name="last" 
+                    class="form-control is-valid" 
+                    ngModel 
+                    required
+                    minlength="4"
+                    #last="ngModel">
+        </div>
+    </div>
 
-                <div>
-                    <label for="password" class="colOne">Password: </label> 
-                    <div id="inputi" class="colTwo">
-                        <input type="password" 
-                                name="password" 
-                                class="form-control" 
-                                ngModel 
-                                #password="ngModel">
-                    </div>
-                </div>
+    <div style="margin: 10px;">
+        <button class="btn btn-light  btn-lg">Change name</button>
+    </div>
 
-                <div style="margin: 10px;">
-                    <button class="btn btn-light  btn-lg">Change</button>
-                </div>
+                
 </form>
 </div>
+
+
+
+
