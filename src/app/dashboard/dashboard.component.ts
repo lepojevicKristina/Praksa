@@ -1,4 +1,5 @@
 import { Component, OnInit, HostBinding, Input } from '@angular/core';
+import { NgModule } from "@angular/core";
 import { AuthenticationService } from '../authentication/authentication.service';
 import { User } from '../user';
 import { Post } from '../post';
@@ -15,9 +16,12 @@ export class DashboardComponent implements OnInit
   fullname: string;
   email: string;
   posts = [];
-//  posts = new Array<Post>();
+  iterator: number = 0
+  myColor: string = "white";
 
-  constructor(private authenticationService: AuthenticationService, private sanitizer: DomSanitizer) 
+  
+  constructor(private authenticationService: AuthenticationService, 
+              private sanitizer: DomSanitizer) 
   { }
 
   ngOnInit() 
@@ -28,76 +32,36 @@ export class DashboardComponent implements OnInit
         {
 
           this.posts = response.postsArray;
-          //console.log(this.posts);
 
-        /*  for(let i=0; i < response.postsArray.length; i++)
-          {
+          //for(let i=0; i < response.postsArray.length; i++)
+          //{
             //let a = response.postsArray[i].file;
             
             //this.posts[i].file = 'data:image/png;base64, ' + this.sanitizer.bypassSecurityTrustResourceUrl(response.postsArray[i].file);
-            //this.posts[i].file = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64, ' + response.postsArray[i].file);
+            //this.posts[i].file = this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64, ' + response.postsArray[i].file);
             //this.posts[i].file =this.transform('data:image/png;base64, ' +  a, 'resourceUrl');
 
-            //let base64 : string = a;
-            //string base64="/9j/4AAQSkZJRgABAQE...";
-            // Naming the image
-            //const date = new Date().valueOf();
-            //let text = '';
-            //const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            //for (let i = 0; i < 5; i++) {
-              //text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
-            //}
-            // Replace extension according to your media type
-            //const imageName = date + '.' + text + '.*';
-            // call method that creates a blob from dataUri
-            //const imageBlob = this.dataURItoBlob(base64);
-            //const imageFile = new File([imageBlob], imageName, { type: 'image/*' });
-            //this.posts[i].file = imageFile
+          //}//kraj for petlje
 
-            
-            this.posts[i].name = response.postsArray[i].name;
-            
-
-
-
-            const base64 = response.postsArray[i].file;
-            //string base64="/9j/4AAQSkZJRgABAQE...";
-            // Naming the image
-            const date = new Date().valueOf();
-            let text = '';
-            const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            for (let i = 0; i < 5; i++) {
-              text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
-            }
-            // Replace extension according to your media type
-            const imageName = date + '.' + text + '.*';
-            // call method that creates a blob from dataUri
-            const imageBlob = this.dataURItoBlob(base64);
-            const imageFile = new File([imageBlob], imageName, { type: 'image/*' });
-            this.posts[i].image = imageFile;
-
-
-          }
-*/
-        }
+        } 
       )
   }
 
 
 
 
-dataURItoBlob(dataURI) 
-{
-  const byteString = window.atob(dataURI);
-  const arrayBuffer = new ArrayBuffer(byteString.length);
-  const int8Array = new Uint8Array(arrayBuffer);
-  for (let i = 0; i < byteString.length; i++) 
+  dataURItoBlob(dataURI) 
   {
-    int8Array[i] = byteString.charCodeAt(i);
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) 
+    {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/png' });    
+    return blob;
   }
-  const blob = new Blob([int8Array], { type: 'image/jpeg' });    
-  return blob;
-}
 
   public transform(value: any, type: string): SafeHtml | SafeUrl | SafeResourceUrl {
     switch (type) {
@@ -107,6 +71,46 @@ dataURItoBlob(dataURI)
 			default: throw new Error(`Invalid safe type specified: ${type}`);
 		}
   }
+
+
+  changeColor()
+  {
+    //let elem = document.getElementById('like');
+    if(this.iterator%2 == 1)
+    {
+      console.log(this.myColor);
+      this.myColor = "red";
+     // this.iterator = 0;
+    }
+    else
+    {
+      this.myColor = "white";
+      this.iterator = 0;
+    }
+  }
+
+
+  like(item)
+  {
+    console.log("like " + item.id);
+    this.iterator = this.iterator + 1;
+
+    this.changeColor();
+
+    console.log(this.myColor);
+
+    document.getElementById('like').style.color = this.myColor;
+
+    this.authenticationService.like(item.id, item.userId)
+      .subscribe (
+        (response) =>
+        {
+
+        }
+      )
+
+  }
+
 
 
   logout()

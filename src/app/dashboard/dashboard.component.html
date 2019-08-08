@@ -3,13 +3,18 @@
     <div *ngFor="let item of posts" class="gallery" id="gallery">
 
             <figure class="mb-3 pics animation all 2">
-                <img  src='data:image/png;base64, {{item.file}}' />
-                <!--<img src="{{item.file}}" />-->
+                <img src='http://praksa.local/files/{{item.file}}' />
                 <hr>
-                <h2 class="text-center my-3">{{ item.name }}</h2>
+                <p class="text-center my-3">{{ item.name }}  
+                    <button (click)='like(item)' id="like" >
+                        Like
+                    </button>
+
+                    {{myColor}}
+                </p>
             </figure>
     </div>
 
-    
+    <!-- [ngStyle]="{'backgorund-color': myColor}" -->
   
  </div>

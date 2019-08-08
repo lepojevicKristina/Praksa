@@ -87,14 +87,6 @@ export class AuthenticationService {
     return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { token, fullname });
   }
 
-  changePassword(password: string)
-  {
-    const token = localStorage.getItem('token');
-
-    return this.http.post<any>(this.global.SERVER_URL + `/api/usersettings`, { token, password });
-  }
-
-
 
 
 
@@ -113,6 +105,11 @@ export class AuthenticationService {
     return this.http.post<any>(this.global.SERVER_URL + `/api/image`, {token, image});
   }
 
+  like(id, userId)
+  {
+    const token = localStorage.getItem('token');
+    return this.http.post<any>(this.global.SERVER_URL + '/api/like', {token, id, userId});
+  }
 
 
 

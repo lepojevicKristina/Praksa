@@ -53,11 +53,9 @@ export class ProfileComponent implements OnInit
 
   onSubmit() 
   {
-    console.log(this.fileToUpload);
    //const formData = new FormData();
    //formData.append('file', this.fileToUpload, this.fileToUpload.name);
 
-    //console.log("form data  " + formData);
 
     let formData: FormData = new FormData();
     //formData.append('avatar', this.fileToUpload, this.fileToUpload.name);
@@ -68,7 +66,6 @@ export class ProfileComponent implements OnInit
     formData.append('file', this.uploadForm.get('avatar').value);
     formData.append('token', token);
 
-    console.log("formdata   " + formData);
 
     //this.authenticationService.uploadImage(formData)
    //this.authenticationService.uploadImage(this.fileToUpload)
@@ -94,6 +91,8 @@ export class ProfileComponent implements OnInit
       this.imageUrl = event.target.result;
     }
     reader.readAsDataURL(this.selectedImage);
+
+
     //console.log(this.selectedImage);
     const token = localStorage.getItem('token');
 
@@ -102,9 +101,9 @@ export class ProfileComponent implements OnInit
     formData.append('file', this.fileToUpload, this.fileToUpload.name);
     formData.append('token', token); 
     this.http.post(this.global.SERVER_URL + '/api/image', formData)
-      .subscribe((val) => {
-
-      console.log(val);
+      .subscribe((val) => 
+      {
+        console.log(val);
       });
       return false; 
 
