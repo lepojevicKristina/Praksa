@@ -1,6 +1,6 @@
 
 export class Post
 {
-    name: string;
-    image: string;
+    name: string = "";
+    image: File;
 }
